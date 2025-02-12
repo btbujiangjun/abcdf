@@ -1,3 +1,10 @@
+"""
+Save a batch of images as a single grid image.
+
+Author: Jiang Jun
+Date: 2025-02-11
+"""
+
 import math
 from torchvision import utils
 
