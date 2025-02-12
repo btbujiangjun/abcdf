@@ -11,7 +11,7 @@ class ABCDict(dict):
 MODEL_CONFIG = ABCDict(None, {
     "image_size": 64,
     "time_steps": 100,
-    "batch_size": 16,
+    "batch_size": 64,
     "auto_normalize": True,
     "lr": 1e-3,
     "adam_betas": (0.9, 0.99),
