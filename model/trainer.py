@@ -135,7 +135,8 @@ class Trainer:
                     local_loss = 0
 
                 # Save model and generate sample images at intervals
-                if global_step % sample_steps == 0:
+                if global_step % sample_steps == 0 or \
+                        i == dataloader_len - 1:
                     milestone = global_step // sample_steps
                     self.save(os.path.join(results_folder, f"model-{milestone}.ckpt"))
                     
