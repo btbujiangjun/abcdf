@@ -169,7 +169,7 @@ class GaussianDiffusion(ABCDiffusion):
     @torch.no_grad()
     def sample(self, batch_size=16, debug=False):
         """
-        Generate images by reversing the diffusion process.
+        Generate images by reversing the diffusion process. Start with pure noise
 
         Args:
             batch_size (int): Number of images to generate.
@@ -181,7 +181,7 @@ class GaussianDiffusion(ABCDiffusion):
         shape = (batch_size, self.model.in_channels, self.image_size, self.image_size)
         
         x_start = None # 对x_0的估计
-        img = self.generate_noise(shape) #noise
+        img = self.generate_noise(shape) #start with pure noise
         
         imgs = [img] # img of each step
         # from t-1 to 0 逐步反向采样
@@ -253,8 +253,8 @@ class GaussianDiffusion(ABCDiffusion):
         b, c, h, w = img.shape
         assert h == self.image_size and w == self.image_size, \
             f"Error:image size dismatch {self.image_size}"
-        img = self.normalize(img.to(self.device))
         
+        img = self.normalize(img.to(self.device))
         x_t, noise, t = self.forward_diffusion(img)
         y = self.model(x_t, t)
         
